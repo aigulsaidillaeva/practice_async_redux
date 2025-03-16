@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import styled from "styled-components";
 
 export const Form = (props) => {
-  const { buttonText, onCencel, submitForm } = props;
+  const { buttonText, onCencel, submitForm, initialData } = props;
   const [data, setData] = useState({
     gun: "",
     color: "",
@@ -28,6 +28,11 @@ export const Form = (props) => {
       magazine: 0,
     });
   }
+  useEffect(() => {
+    if (initialData && initialData.id) {
+      setData(initialData);
+    }
+  }, [initialData]);
 
   return (
     <StyledForm onSubmit={onSubmit}>
